@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import Video from './Video'
 
 export default function App() {
-    const [frameNumber, setFrameNumber] = useState(1);
+    const [frameNumber, setFrameNumber] = useState(15);
     const [displayMode,setDisplayMode] = useState(true);
     const [boneMap, setBoneMap] = useState<Record<string, number>>({});
     const [selectedBone, setSelectedBone] = useState<string>("");
@@ -22,7 +22,8 @@ export default function App() {
 
     const [baseFolder, setBaseFolder] = useState<string>("");
     const folder = baseFolder + (displayMode ? 'skin' : 'bone');
-    const assetPath = `/${folder}`;
+    // const assetPath = `/${folder}`;
+    const assetPath = 'test'
 
     // ---- 修改FPS函数 ----
     const applyFPS = () => {
