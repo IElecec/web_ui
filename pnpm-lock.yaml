@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@playcanvas/react':
         specifier: 0.4.1
-        version: 0.4.1(playcanvas@2.17.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sync-ammo@0.1.2)
+        version: 0.4.1(playcanvas@2.7.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sync-ammo@0.1.2)
       playcanvas:
-        specifier: 2.17.2
-        version: 2.17.2
+        specifier: 2.7.7
+        version: 2.7.7
       pyodide:
         specifier: ^0.29.3
         version: 0.29.3
@@ -269,8 +269,8 @@ packages:
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
 
-  canvas@3.2.1:
-    resolution: {integrity: sha512-ej1sPFR5+0YWtaVp6S1N1FVz69TQCqmrkGeRvQxZeAB1nAIcjNTHVwrZtYtWFFBmQsF40/uDLehsW5KuYC99mg==}
+  canvas@3.1.0:
+    resolution: {integrity: sha512-tTj3CqqukVJ9NgSahykNwtGda7V33VLObwrHfzT0vqJXu7J4d4C/7kQQW3fOEGDfZZoILPut5H00gOjyttPGyg==}
     engines: {node: ^18.12.0 || >= 20.9.0}
 
   chownr@1.1.4:
@@ -349,8 +349,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  playcanvas@2.17.2:
-    resolution: {integrity: sha512-+J3ewI2Zi2C1IZ/tZqubBBYSoruaMyPh9QD1/IQS/0QRmuZPNtx+9SwrYsK2QR91+ImeH0MRchkOFfNYWwEOVQ==}
+  playcanvas@2.7.7:
+    resolution: {integrity: sha512-iBiBGmfhvM3/oIo+PoRhb1FvySoH30wMLgYw+urIv12S4yDAUxWKKPYHmUq6rWp8NKRDmjFI66Yjl/lGGLDk9w==}
     engines: {node: '>=18.0.0'}
 
   prebuild-install@7.1.3:
@@ -538,9 +538,9 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@playcanvas/react@0.4.1(playcanvas@2.17.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sync-ammo@0.1.2)':
+  '@playcanvas/react@0.4.1(playcanvas@2.7.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sync-ammo@0.1.2)':
     dependencies:
-      playcanvas: 2.17.2
+      playcanvas: 2.7.7
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
     optionalDependencies:
@@ -663,7 +663,7 @@ snapshots:
       ieee754: 1.2.1
     optional: true
 
-  canvas@3.2.1:
+  canvas@3.1.0:
     dependencies:
       node-addon-api: 7.1.1
       prebuild-install: 7.1.3
@@ -743,12 +743,12 @@ snapshots:
       wrappy: 1.0.2
     optional: true
 
-  playcanvas@2.17.2:
+  playcanvas@2.7.7:
     dependencies:
       '@types/webxr': 0.5.24
       '@webgpu/types': 0.1.69
     optionalDependencies:
-      canvas: 3.2.1
+      canvas: 3.1.0
 
   prebuild-install@7.1.3:
     dependencies:

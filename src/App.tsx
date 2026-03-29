@@ -23,7 +23,7 @@ export default function App() {
     const [baseFolder, setBaseFolder] = useState<string>("");
     const folder = baseFolder + (displayMode ? 'skin' : 'bone');
     // const assetPath = `/${folder}`;
-    const assetPath = 'test'
+    const assetPath = 'test';
 
     // ---- 修改FPS函数 ----
     const applyFPS = () => {
