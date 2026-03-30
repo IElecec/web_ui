@@ -1,10 +1,15 @@
 import {useState, useEffect} from 'react';
 import Video from './Video'
+import { GaussianVideoConfig } from './GaussianVideoConfig';
 
 export default function App() {
-    const originalFrameNumber = 50;
-    const frameStart = 40;
-    const assetPath = '0517_coser21_0';
+    const [currentConfigId, setCurrentConfigId] = useState('hu_flute2');
+
+    const currentConfig = GaussianVideoConfig[currentConfigId];
+
+    const originalFrameNumber = currentConfig.frameNumber;
+    const frameStart = currentConfig.frameStart;
+    const assetPath = currentConfig.assetPath;
 
     const [frameNumber, setFrameNumber] = useState(originalFrameNumber);
 
@@ -15,17 +20,27 @@ export default function App() {
 
     const [interpolated, setInterpolated] = useState(false);
 
-    const [keyFrameA, setKeyFrameA] = useState<number>(5);
-    const [keyFrameB, setKeyFrameB] = useState<number>(15);
+    const [keyFrameA, setKeyFrameA] = useState<number>(0);
+    const [keyFrameB, setKeyFrameB] = useState<number>(0);
 
-    const [tempKeyFrameA, setTempKeyFrameA] = useState<number>(5);
-    const [tempKeyFrameB, setTempKeyFrameB] = useState<number>(15);
+    const [tempKeyFrameA, setTempKeyFrameA] = useState<number>(keyFrameA);
+    const [tempKeyFrameB, setTempKeyFrameB] = useState<number>(keyFrameB);
 
     const [baseFolder, setBaseFolder] = useState<string>("");    
 
     const applyFPS = () => {
         setFPS(tempFPS);
     };
+
+    useEffect(() => {
+        setFrameNumber(originalFrameNumber);
+        setTempFrame(1);
+        setInterpolated(false);
+        setKeyFrameA(0);
+        setKeyFrameB(0);
+        setTempKeyFrameA(keyFrameA);
+        setTempKeyFrameB(keyFrameB);
+    }, [currentConfigId, originalFrameNumber]);
 
     async function applyInterpolation() {
         if (!interpolated) {
@@ -71,6 +86,26 @@ export default function App() {
             >
                 <div style={{ fontWeight: 'bold', marginBottom: '12px', fontSize: '14px' }}>
                     🎛 Control Panel
+                </div>
+
+                <div style={{ marginBottom: '10px' }}>
+                    <div style={{ marginBottom: '4px', fontSize: '12px' }}>Resource</div>
+                    <select
+                        value={currentConfigId}
+                        onChange={(e) => setCurrentConfigId(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '6px',
+                            borderRadius: '4px',
+                            boxSizing: 'border-box'
+                        }}
+                    >
+                        {Object.values(GaussianVideoConfig).map((config) => (
+                            <option key={config.id} value={config.id}>
+                                {config.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div style={{ marginBottom: '10px' }}>
