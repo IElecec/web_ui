@@ -195,6 +195,7 @@ function VolumetricVideo({
 
 export default function Video({
   src,
+  frameStart,
   frameLength,
   fps,
   interpolated,
@@ -202,11 +203,12 @@ export default function Video({
   keyFrameB,
 }: {
   src: string;
+  frameStart: number;
   frameLength: number;
   fps?: number;
   keyFrameA?: number;
   keyFrameB?: number;
   interpolated?: boolean;
 }) {
-  return <VolumetricVideo src={src} frameStart={40} frameLength={frameLength} fps={fps} interpolated={interpolated} keyFrameA={keyFrameA} keyFrameB={keyFrameB} />;
+  return <VolumetricVideo src={src} frameStart={frameStart} frameLength={frameLength} fps={fps} interpolated={interpolated} keyFrameA={keyFrameA} keyFrameB={keyFrameB} />;
 }

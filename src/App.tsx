@@ -2,16 +2,17 @@ import {useState, useEffect} from 'react';
 import Video from './Video'
 
 export default function App() {
-    const [frameNumber, setFrameNumber] = useState(50);
+    const originalFrameNumber = 50;
+    const frameStart = 40;
+    const assetPath = '0517_coser21_0';
+
+    const [frameNumber, setFrameNumber] = useState(originalFrameNumber);
 
     const [tempFrame, setTempFrame] = useState(1);
 
     const [fps, setFPS] = useState<number>(15);
     const [tempFPS, setTempFPS] = useState<number>(15);
 
-    const [rotating, setRotating] = useState(false);
-    const [interpolating, setInterpolating] = useState(false);
-    const [rotated, setRotated] = useState(false);
     const [interpolated, setInterpolated] = useState(false);
 
     const [keyFrameA, setKeyFrameA] = useState<number>(5);
@@ -20,17 +21,14 @@ export default function App() {
     const [tempKeyFrameA, setTempKeyFrameA] = useState<number>(5);
     const [tempKeyFrameB, setTempKeyFrameB] = useState<number>(15);
 
-    const [baseFolder, setBaseFolder] = useState<string>("");
-
-    const assetPath = '0517_coser21_0';
+    const [baseFolder, setBaseFolder] = useState<string>("");    
 
     const applyFPS = () => {
         setFPS(tempFPS);
     };
 
     async function applyInterpolation() {
-        setInterpolating(true);
-        try {
+        if (!interpolated) {
             setFrameNumber(tempFrame);
             setKeyFrameA(tempKeyFrameA);
             setKeyFrameB(tempKeyFrameB);
@@ -38,8 +36,10 @@ export default function App() {
 
             console.log(`Applying interpolation.`);
             console.log(`keyFrameA=${tempKeyFrameA}, keyFrameB=${tempKeyFrameB}`);
-        } finally {
-            setInterpolating(false);
+        }
+        else {
+            setFrameNumber(originalFrameNumber);
+            setInterpolated(false);
         }
     }
 
@@ -47,6 +47,7 @@ export default function App() {
         <>
             <Video
                 src={assetPath}
+                frameStart={frameStart}
                 frameLength={frameNumber}
                 fps={fps}
                 interpolated={interpolated}
@@ -82,41 +83,42 @@ export default function App() {
                     />
                 </div>
 
-                <div style={{ marginBottom: '10px' }}>
-                    <div style={{ marginBottom: '4px', fontSize: '12px' }}>Key Frame A</div>
-                    <input
+                <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ marginBottom: '4px', fontSize: '12px' }}>Key Frame A</div>
+                        <input
                         type="number"
                         value={tempKeyFrameA}
                         onChange={(e) => setTempKeyFrameA(Number(e.target.value))}
-                        style={{ width: '95%', padding: '4px', borderRadius: '4px' }}
-                    />
-                </div>
+                        style={{ width: '100%', padding: '4px', borderRadius: '4px', boxSizing: 'border-box' }}
+                        />
+                    </div>
 
-                <div style={{ marginBottom: '10px' }}>
-                    <div style={{ marginBottom: '4px', fontSize: '12px' }}>Key Frame B</div>
-                    <input
+                    <div style={{ flex: 1 }}>
+                        <div style={{ marginBottom: '4px', fontSize: '12px' }}>Key Frame B</div>
+                        <input
                         type="number"
                         value={tempKeyFrameB}
                         onChange={(e) => setTempKeyFrameB(Number(e.target.value))}
-                        style={{ width: '95%', padding: '4px', borderRadius: '4px' }}
-                    />
+                        style={{ width: '100%', padding: '4px', borderRadius: '4px', boxSizing: 'border-box' }}
+                        />
+                    </div>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '10px' }}>
                     <button
                         onClick={applyInterpolation}
-                        disabled={interpolating}
                         style={{
                             width: '100%',
                             padding: '8px',
-                            background: interpolating ? '#666' : '#28a745',
+                            background: interpolated ? '#666' : '#28a745',
                             border: 'none',
                             borderRadius: '5px',
                             color: 'white',
                             cursor: 'pointer'
                         }}
                     >
-                        {interpolating ? "Interpolating..." : "Apply Interpolation"}
+                        {interpolated ? "Return" : "Interpolate"}
                     </button>
                 </div>
 
