@@ -3,7 +3,7 @@ import Video from './Video'
 import { GaussianVideoConfig } from './GaussianVideoConfig';
 
 export default function App() {
-    const [currentConfigId, setCurrentConfigId] = useState('hu_flute2');
+    const [currentConfigId, setCurrentConfigId] = useState('none');
 
     const currentConfig = GaussianVideoConfig[currentConfigId];
 

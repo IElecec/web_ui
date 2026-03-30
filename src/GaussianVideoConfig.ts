@@ -7,6 +7,13 @@ export type GaussianVideoConfig = {
 };
 
 export const GaussianVideoConfig: Record<string, GaussianVideoConfig> = {
+  none: {
+    id: 'none',
+    name: 'None',
+    frameNumber: 1,
+    frameStart: 0,
+    assetPath: 'none',
+  },
   coser21: {
     id: 'coser21',
     name: 'Coser 21',
