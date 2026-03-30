@@ -35,4 +35,18 @@ export const GaussianVideoConfig: Record<string, GaussianVideoConfig> = {
     frameStart: 501,
     assetPath: '0509_hu_flute2_1',
   },
+  zzy_dualgs: {
+    id: 'zzy_dualgs',
+    name: 'Zzy DualGS',
+    frameNumber: 50,
+    frameStart: 251,
+    assetPath: '0105_zzy_dualgs',
+  },
+  jyf: {
+    id: 'jyf',
+    name: 'Jyf',
+    frameNumber: 30,
+    frameStart: 301,
+    assetPath: '0506_jyf_0',
+  },
 };

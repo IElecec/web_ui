@@ -15,8 +15,8 @@ export default function App() {
 
     const [tempFrame, setTempFrame] = useState(1);
 
-    const [fps, setFPS] = useState<number>(15);
-    const [tempFPS, setTempFPS] = useState<number>(15);
+    const [fps, setFPS] = useState<number>(30);
+    const [tempFPS, setTempFPS] = useState<number>(fps);
 
     const [interpolated, setInterpolated] = useState(false);
 
