@@ -94,114 +94,114 @@ function interpGSplatData(pc: any, aData: GSplatData, bData: GSplatData, t: numb
     interpScalarProp('z');
 
     // 2) scaling
-    // interpScalarProp('scale_0');
-    // interpScalarProp('scale_1');
-    // interpScalarProp('scale_2');
+    interpScalarProp('scale_0');
+    interpScalarProp('scale_1');
+    interpScalarProp('scale_2');
 
     // 3) dc color
-    // interpScalarProp('f_dc_0');
-    // interpScalarProp('f_dc_1');
-    // interpScalarProp('f_dc_2');
+    interpScalarProp('f_dc_0');
+    interpScalarProp('f_dc_1');
+    interpScalarProp('f_dc_2');
 
     // 4) opacity
-    // interpScalarProp('opacity');
+    interpScalarProp('opacity');
 
     // 5) features_rest / SH
-    // for (let k = 0; ; k++) {
-    //     const name = `f_rest_${k}`;
-    //     const a = aData.getProp(name);
-    //     const b = bData.getProp(name);
-    //     if (!a || !b) break;
-    //
-    //     const outProp = ensureOutProp(name);
-    //     for (let i = 0; i < n; i++) {
-    //         const j = mapAtoB[i];
-    //         outProp[i] = lerp(a[i], b[j], t);
-    //     }
-    // }
+    for (let k = 0; ; k++) {
+        const name = `f_rest_${k}`;
+        const a = aData.getProp(name);
+        const b = bData.getProp(name);
+        if (!a || !b) break;
+    
+        const outProp = ensureOutProp(name);
+        for (let i = 0; i < n; i++) {
+            const j = mapAtoB[i];
+            outProp[i] = lerp(a[i], b[j], t);
+        }
+    }
 
     // 6) quaternion slerp
-    // const aRot0 = aData.getProp('rot_0');
-    // const aRot1 = aData.getProp('rot_1');
-    // const aRot2 = aData.getProp('rot_2');
-    // const aRot3 = aData.getProp('rot_3');
-    //
-    // const bRot0 = bData.getProp('rot_0');
-    // const bRot1 = bData.getProp('rot_1');
-    // const bRot2 = bData.getProp('rot_2');
-    // const bRot3 = bData.getProp('rot_3');
-    //
-    // if (aRot0 && aRot1 && aRot2 && aRot3 && bRot0 && bRot1 && bRot2 && bRot3) {
-    //     const oRot0 = ensureOutProp('rot_0');
-    //     const oRot1 = ensureOutProp('rot_1');
-    //     const oRot2 = ensureOutProp('rot_2');
-    //     const oRot3 = ensureOutProp('rot_3');
-    //
-    //     for (let i = 0; i < n; i++) {
-    //         const j = mapAtoB[i];
-    //
-    //         let ax = aRot0[i];
-    //         let ay = aRot1[i];
-    //         let az = aRot2[i];
-    //         let aw = aRot3[i];
-    //
-    //         let bx = bRot0[j];
-    //         let by = bRot1[j];
-    //         let bz = bRot2[j];
-    //         let bw = bRot3[j];
-    //
-    //         let lenA = Math.hypot(ax, ay, az, aw);
-    //         if (lenA > eps) {
-    //             ax /= lenA; ay /= lenA; az /= lenA; aw /= lenA;
-    //         }
-    //
-    //         let lenB = Math.hypot(bx, by, bz, bw);
-    //         if (lenB > eps) {
-    //             bx /= lenB; by /= lenB; bz /= lenB; bw /= lenB;
-    //         }
-    //
-    //         let dot = ax * bx + ay * by + az * bz + aw * bw;
-    //         if (dot < 0) {
-    //             bx = -bx; by = -by; bz = -bz; bw = -bw;
-    //             dot = -dot;
-    //         }
-    //
-    //         dot = Math.min(1, Math.max(-1, dot));
-    //
-    //         const theta0 = Math.acos(dot);
-    //         const sinTheta0 = Math.sin(theta0);
-    //
-    //         let rx: number;
-    //         let ry: number;
-    //         let rz: number;
-    //         let rw: number;
-    //
-    //         if (sinTheta0 < eps) {
-    //             rx = (1 - t) * ax + t * bx;
-    //             ry = (1 - t) * ay + t * by;
-    //             rz = (1 - t) * az + t * bz;
-    //             rw = (1 - t) * aw + t * bw;
-    //         } else {
-    //             const s0 = Math.sin((1 - t) * theta0) / sinTheta0;
-    //             const s1 = Math.sin(t * theta0) / sinTheta0;
-    //
-    //             rx = s0 * ax + s1 * bx;
-    //             ry = s0 * ay + s1 * by;
-    //             rz = s0 * az + s1 * bz;
-    //             rw = s0 * aw + s1 * bw;
-    //         }
-    //
-    //         const lenR = Math.hypot(rx, ry, rz, rw);
-    //         if (lenR > eps) {
-    //             rx /= lenR; ry /= lenR; rz /= lenR; rw /= lenR;
-    //         }
-    //
-    //         oRot0[i] = rx;
-    //         oRot1[i] = ry;
-    //         oRot2[i] = rz;
-    //         oRot3[i] = rw;
-    //     }
-    // }
+    const aRot0 = aData.getProp('rot_0');
+    const aRot1 = aData.getProp('rot_1');
+    const aRot2 = aData.getProp('rot_2');
+    const aRot3 = aData.getProp('rot_3');
+    
+    const bRot0 = bData.getProp('rot_0');
+    const bRot1 = bData.getProp('rot_1');
+    const bRot2 = bData.getProp('rot_2');
+    const bRot3 = bData.getProp('rot_3');
+    
+    if (aRot0 && aRot1 && aRot2 && aRot3 && bRot0 && bRot1 && bRot2 && bRot3) {
+        const oRot0 = ensureOutProp('rot_0');
+        const oRot1 = ensureOutProp('rot_1');
+        const oRot2 = ensureOutProp('rot_2');
+        const oRot3 = ensureOutProp('rot_3');
+    
+        for (let i = 0; i < n; i++) {
+            const j = mapAtoB[i];
+    
+            let ax = aRot0[i];
+            let ay = aRot1[i];
+            let az = aRot2[i];
+            let aw = aRot3[i];
+    
+            let bx = bRot0[j];
+            let by = bRot1[j];
+            let bz = bRot2[j];
+            let bw = bRot3[j];
+    
+            let lenA = Math.hypot(ax, ay, az, aw);
+            if (lenA > eps) {
+                ax /= lenA; ay /= lenA; az /= lenA; aw /= lenA;
+            }
+    
+            let lenB = Math.hypot(bx, by, bz, bw);
+            if (lenB > eps) {
+                bx /= lenB; by /= lenB; bz /= lenB; bw /= lenB;
+            }
+    
+            let dot = ax * bx + ay * by + az * bz + aw * bw;
+            if (dot < 0) {
+                bx = -bx; by = -by; bz = -bz; bw = -bw;
+                dot = -dot;
+            }
+    
+            dot = Math.min(1, Math.max(-1, dot));
+    
+            const theta0 = Math.acos(dot);
+            const sinTheta0 = Math.sin(theta0);
+    
+            let rx: number;
+            let ry: number;
+            let rz: number;
+            let rw: number;
+    
+            if (sinTheta0 < eps) {
+                rx = (1 - t) * ax + t * bx;
+                ry = (1 - t) * ay + t * by;
+                rz = (1 - t) * az + t * bz;
+                rw = (1 - t) * aw + t * bw;
+            } else {
+                const s0 = Math.sin((1 - t) * theta0) / sinTheta0;
+                const s1 = Math.sin(t * theta0) / sinTheta0;
+    
+                rx = s0 * ax + s1 * bx;
+                ry = s0 * ay + s1 * by;
+                rz = s0 * az + s1 * bz;
+                rw = s0 * aw + s1 * bw;
+            }
+    
+            const lenR = Math.hypot(rx, ry, rz, rw);
+            if (lenR > eps) {
+                rx /= lenR; ry /= lenR; rz /= lenR; rw /= lenR;
+            }
+    
+            oRot0[i] = rx;
+            oRot1[i] = ry;
+            oRot2[i] = rz;
+            oRot3[i] = rw;
+        }
+    }
 
     return out;
 }
