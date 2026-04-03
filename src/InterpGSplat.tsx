@@ -209,29 +209,35 @@ function interpGSplatData(pc: any, aData: GSplatData, bData: GSplatData, t: numb
 // e.g. const gInterp = interpGSplat(pc, gA, gB, 0.5);
 
 export function interpGSplatResource(
-    pc: any,
-    a: GSplatResource,
-    b: GSplatResource,
-    t: number
+  pc: any,
+  a: GSplatResource,
+  b: GSplatResource,
+  t: number
 ): GSplatResource {
     if (!a || !b) {
-        throw new Error('a 和 b 不能为空');
+    throw new Error('a 和 b 不能为空');
     }
 
-    const aData = a.splatData as GSplatData;
-    const bData = b.splatData as GSplatData;
+    const aData =
+    ((a as any).gsplatData ?? (a as any).splatData) as GSplatData | undefined;
+    const bData =
+    ((b as any).gsplatData ?? (b as any).splatData) as GSplatData | undefined;
 
     if (!aData || !bData) {
-        throw new Error('无法从 GSplatResource 中获取 splatData');
+        console.error('a resource:', a);
+        console.error('b resource:', b);
+        throw new Error('无法从 GSplatResource 中获取 gsplatData/splatData');
     }
 
     const outData = interpGSplatData(pc, aData, bData, t);
 
     const app = pc?.app ?? pc;
+    const device = app?.graphicsDevice ?? app?.device ?? pc?.graphicsDevice ?? pc;
 
-    if (!app) {
-        throw new Error('无法获取 AppBase');
+    if (!device) {
+        throw new Error('无法获取 GraphicsDevice');
     }
+
     console.log(`Interpolated frame with t=${t.toFixed(2)}`);
-    return new GSplatResource(app, outData, []);
+    return new GSplatResource(device, outData, []);
 }

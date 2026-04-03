@@ -168,19 +168,18 @@ export const AnimGSplat = ({
   }, [parent]);
 
   useLayoutEffect(() => {
-    const asset = assets[frameCurrent]?.asset;
-    if (asset) {
-      const resource = asset.resource as GSplatResource;
-      if (component)
-        if (component.instance) {
-          const instance = component.instance as AnimGSplatInstance;
-          instance.updateGSplat(resource.createSplat() as GSplat);
-        } else {
-          const gsplat = resource.createSplat() as GSplat;
-          component.instance = new AnimGSplatInstance(gsplat, gsplat.numSplats * 2) as GSplatInstance;
-        }
+    const current = assets[frameCurrent]?.asset as Asset | null;
+    if (!current || !component) return;
+
+    component.castShadows = true;
+    component.unified = true;
+
+    // 插值帧或手工资源：直接走 resource
+    if ((current as any).resource && !(current as any).id) {
+      component.resource = (current as any).resource as GSplatResource;
+    } else {
+      component.asset = current;
     }
-    return () => {};
   }, [frameCurrent, component, assets]);
 
   return null;

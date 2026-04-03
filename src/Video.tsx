@@ -1,11 +1,12 @@
 import './App.css';
 import './AnimGSplat.tsx';
 import { Application, Entity } from '@playcanvas/react';
-import { Camera } from '@playcanvas/react/components';
+import { Camera, Light, Render} from '@playcanvas/react/components';
 import { OrbitControls } from '@playcanvas/react/scripts';
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimGSplat } from './AnimGSplat.tsx';
 import { SceneSkybox } from './Skybox.tsx';
+import { ShadowCatcherPlane } from './ShadowCatcher';
 
 function VolumetricVideo({
   src,
@@ -108,8 +109,51 @@ function VolumetricVideo({
           />
         </Entity>
 
+        {/* light */}
+        <Entity
+          name="sun"
+          rotation={[45, 30, 0]}
+        >
+          <Light
+            type="directional"
+            color={[1, 1, 1]}
+            intensity={1.2}
+            castShadows={true}
+            shadowDistance={80}
+            shadowResolution={2048}
+            shadowBias={0.2}
+            normalOffsetBias={0.05}
+          />
+        </Entity>
+        {/* ground */}
+        {/* <Entity
+          name="ground"
+          position={[0, 0, 0]}
+          rotation={[0, 0, 0]}
+          scale={[40, 40, 40]}
+        >
+          <Render
+            type="plane"
+            castShadows={false}
+            receiveShadows={true}
+          />
+        </Entity> */}
+        {/* cube */}
+        {/* <Entity position={[0, 5, 0]} scale={[2, 2, 2]}>
+          <Render type="box" castShadows={true} receiveShadows={true} />
+        </Entity> */}
+        {/* Shadow Catcher Plane */}
+        <Entity name="shadow-catcher" position={[0, 0, 0]}>
+          <ShadowCatcherPlane scale={[100, 100, 100]} y={0} enabled={true} />
+        </Entity>
+
         <Entity position={[0, 0, 0]} rotation={[0, 0, 0]}>
           <Entity position={[0, 12, 0]} scale={[8, 8, 8]} rotation={[165, 0, 0]}>
+            {/* <AnimGSplatOfficial
+              src={src}
+              frameStart={frameStart}
+              frameCurrent={frameCurrent}
+            /> */}
             <AnimGSplat
               src={src}
               frameStart={frameStart}
