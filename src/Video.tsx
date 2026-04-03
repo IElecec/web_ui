@@ -5,6 +5,7 @@ import { Camera } from '@playcanvas/react/components';
 import { OrbitControls } from '@playcanvas/react/scripts';
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimGSplat } from './AnimGSplat.tsx';
+import { SceneSkybox } from './Skybox.tsx';
 
 function VolumetricVideo({
   src,
@@ -94,11 +95,12 @@ function VolumetricVideo({
   return (
     <>
       <Application className="fullscreen">
-        <Entity name="camera" position={[0, 0.5, 0]} rotation={[0, 0, 0]}>
+        <Entity name="camera" position={[0, 1, 0]} rotation={[0, 0, 0]}>
+          <SceneSkybox/>
           <Camera />
           <OrbitControls
-            distance={5}
-            distanceMax={5}
+            distance={50}
+            distanceMax={50}
             distanceMin={0.3}
             pitchAngleMin={-90}
             pitchAngleMax={90}
@@ -107,7 +109,7 @@ function VolumetricVideo({
         </Entity>
 
         <Entity position={[0, 0, 0]} rotation={[0, 0, 0]}>
-          <Entity position={[-0.22, 1, -0.22]} scale={[1, 1, 1]} rotation={[180, 0, 0]}>
+          <Entity position={[0, 12, 0]} scale={[8, 8, 8]} rotation={[165, 0, 0]}>
             <AnimGSplat
               src={src}
               frameStart={frameStart}
