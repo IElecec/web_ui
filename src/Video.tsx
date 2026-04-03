@@ -169,13 +169,60 @@ function VolumetricVideo({
       </Application>
 
       <div className="top-overlay">
-        <p>
-          Current Frame: {frameCurrent} | Frames Loaded: {frameLoaded}/{frameLength} | FPS: {fps}
-        </p>
+        <div
+          style={{
+            position: 'absolute',
+            top: 16,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            padding: '12px 14px',
+            borderRadius: 12,
+            background: 'rgba(0, 0, 0, 0.45)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            color: '#fff',
+            boxShadow: '0 6px 24px rgba(0, 0, 0, 0.25)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+            minWidth: 260,
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              fontSize: 14,
+              lineHeight: 1.5,
+              fontFamily: 'system-ui, sans-serif',
+              textShadow: '0 1px 2px rgba(0,0,0,0.45)',
+            }}
+          >
+            Current Frame: {frameCurrent} |
+            Frames Loaded: {frameLoaded}/{frameLength} |
+            FPS: {fps}
+          </p>
 
-        <button onClick={handleTogglePlay} type="button">
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
+          <button
+            onClick={handleTogglePlay}
+            type="button"
+            style={{
+              appearance: 'none',
+              border: '1px solid rgba(255,255,255,0.18)',
+              background: 'rgba(255,255,255,0.12)',
+              color: '#fff',
+              borderRadius: 10,
+              padding: '8px 12px',
+              fontSize: 14,
+              fontWeight: 600,
+              cursor: 'pointer',
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
+            }}
+          >
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+        </div>
 
         <div
           style={{
