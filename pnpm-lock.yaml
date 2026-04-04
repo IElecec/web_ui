@@ -30,6 +30,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.9.4
         version: 1.9.4
+      '@playcanvas/splat-transform':
+        specifier: ^1.10.2
+        version: 1.10.2(playcanvas@2.17.2)
       '@rsbuild/core':
         specifier: ^1.3.22
         version: 1.7.3
@@ -146,6 +149,13 @@ packages:
     peerDependenciesMeta:
       sync-ammo:
         optional: true
+
+  '@playcanvas/splat-transform@1.10.2':
+    resolution: {integrity: sha512-bJ4PXFvwmxPd1lgrt5S/3DUmnbjST4LAcyOXxrX2/3pKP32xHpFhb3RR+t2daGHmNihSnOLC4S55aMpfzSw/Ng==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+    peerDependencies:
+      playcanvas: '>=2.0.0'
 
   '@rsbuild/core@1.7.3':
     resolution: {integrity: sha512-kI1oQvCXbQYxUvQPnDLdjSX4gFsbrFNpuUj6jXEJ7IcJ74Q+n4oeFj74/8tKerhxhe0L90m/ZQfzLeN5ORGA9w==}
@@ -282,6 +292,15 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
+  debug@4.4.3:
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   decompress-response@6.0.0:
     resolution: {integrity: sha512-aW35yZM6Bb/4oJlZncMH2LCoZtJXTRxES17vE3hoRiowU2kWHaJKFkSBDnDR+cm9J+9QhXmREyIfv0pji9ejCQ==}
     engines: {node: '>=10'}
@@ -334,6 +353,9 @@ packages:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
     hasBin: true
 
+  meshoptimizer@1.1.0:
+    resolution: {integrity: sha512-KYYsWvWduDIm86HVtTKW1luZSusEv+tgSqYvgSJcKzaHIUNKL9/qQ+48YKcLxknAE8GQAeVi68mgvmEGrjwqjA==}
+
   mimic-response@3.1.0:
     resolution: {integrity: sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==}
     engines: {node: '>=10'}
@@ -343,6 +365,9 @@ packages:
 
   mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
+
+  ms@2.1.3:
+    resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
   napi-build-utils@2.0.0:
     resolution: {integrity: sha512-GEbrYkbfF7MoNaoh2iGG84Mnf/WZfB0GdGEsM8wz7Expx/LlWf5U8t9nvJKXSp3qr5IsEbK04cBGhol/KwOsWA==}
@@ -445,6 +470,9 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  webgpu@0.3.10:
+    resolution: {integrity: sha512-5QKDzvwlPaYshQAmhG0WImX5cvWsY5XRiukUwtKaoMEk0csi4tRSH/cwsoNn9S7JJFHnkSDA/NzfuHmcavNBmw==}
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
@@ -556,6 +584,14 @@ snapshots:
       sync-ammo: 0.1.2
     transitivePeerDependencies:
       - babel-plugin-macros
+
+  '@playcanvas/splat-transform@1.10.2(playcanvas@2.17.2)':
+    dependencies:
+      meshoptimizer: 1.1.0
+      playcanvas: 2.17.2
+      webgpu: 0.3.10
+    transitivePeerDependencies:
+      - supports-color
 
   '@rsbuild/core@1.7.3':
     dependencies:
@@ -687,6 +723,10 @@ snapshots:
 
   csstype@3.2.3: {}
 
+  debug@4.4.3:
+    dependencies:
+      ms: 2.1.3
+
   decompress-response@6.0.0:
     dependencies:
       mimic-response: 3.1.0
@@ -731,6 +771,8 @@ snapshots:
 
   jiti@2.6.1: {}
 
+  meshoptimizer@1.1.0: {}
+
   mimic-response@3.1.0:
     optional: true
 
@@ -739,6 +781,8 @@ snapshots:
 
   mkdirp-classic@0.5.3:
     optional: true
+
+  ms@2.1.3: {}
 
   napi-build-utils@2.0.0:
     optional: true
@@ -875,6 +919,13 @@ snapshots:
 
   util-deprecate@1.0.2:
     optional: true
+
+  webgpu@0.3.10:
+    dependencies:
+      '@webgpu/types': 0.1.69
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
 
   wrappy@1.0.2:
     optional: true

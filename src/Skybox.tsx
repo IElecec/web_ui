@@ -48,7 +48,7 @@ const SKY_PRESETS = {
   },
 };
 
-export function SceneSkybox({ presetName = 'Street Dome' }: { presetName?: keyof typeof SKY_PRESETS }) {
+export function SceneSkybox({ presetName = 'Night' }: { presetName?: keyof typeof SKY_PRESETS }) {
   const app = useApp();
 
   useEffect(() => {

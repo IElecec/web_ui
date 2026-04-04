@@ -180,6 +180,40 @@ export const AnimGSplat = ({
     } else {
       component.asset = current;
     }
+    const glsl = `
+uniform vec3 uLightDir;
+uniform vec3 uLightColor;
+uniform float uAmbient;
+uniform float uDiffuse;
+
+void modifySplatCenter(inout vec3 center) {
+}
+
+void modifySplatRotationScale(
+    vec3 originalCenter,
+    vec3 modifiedCenter,
+    inout vec4 rotation,
+    inout vec3 scale
+) {
+}
+
+void modifySplatColor(vec3 center, inout vec4 color) {
+    vec3 fakeNormal = vec3(0.0, 1.0, 0.0);
+
+    float ndl = max(dot(normalize(fakeNormal), normalize(-uLightDir)), 0.0);
+    float lighting = uAmbient + ndl * uDiffuse;
+
+    color.rgb *= mix(vec3(1.0), uLightColor, ndl);
+    color.rgb *= lighting;
+}
+`;
+
+    component.setWorkBufferModifier({ glsl });
+
+    component.setParameter('uLightDir', [0.3, -1.0, 0.2]);
+    component.setParameter('uLightColor', [1.0, 1.0, 1.0]);
+    component.setParameter('uAmbient', 0.85);
+    component.setParameter('uDiffuse', 0.25);
   }, [frameCurrent, component, assets]);
 
   return null;

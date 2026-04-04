@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rsbuild build",
     "check": "biome check --write",
-    "dev": "rsbuild dev",
     "format": "biome format --write",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "spz:convert": "node scripts/convert-spz.mjs",
+    "dev": "rsbuild dev",
+    "build": "rsbuild build"
   },
   "dependencies": {
     "@playcanvas/react": "^0.11.3",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@playcanvas/splat-transform": "^1.10.2",
     "@rsbuild/core": "^1.3.22",
     "@rsbuild/plugin-react": "^1.3.2",
     "@types/react": "^19.1.6",
