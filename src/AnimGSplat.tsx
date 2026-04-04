@@ -180,7 +180,131 @@ export const AnimGSplat = ({
     } else {
       component.asset = current;
     }
-  }, [frameCurrent, component, assets]);
+    }, [frameCurrent, component, assets]);
+//     const glsl = `
+// uniform vec3 uTint;
+
+// void modifySplatCenter(inout vec3 center) {
+// }
+
+// void modifySplatRotationScale(
+//     vec3 originalCenter,
+//     vec3 modifiedCenter,
+//     inout vec4 rotation,
+//     inout vec3 scale
+// ) {
+// }
+
+// void modifySplatColor(vec3 center, inout vec4 color) {
+//     color.rgb *= uTint;
+// }
+// `;
+
+// component.setWorkBufferModifier({ glsl });
+// component.setParameter('uTint', [1.0, 0.3, 0.3]);
+//   const glsl = `
+// uniform float uHeightMin;
+// uniform float uHeightMax;
+// uniform vec3 uWarmColor;
+// uniform vec3 uCoolColor;
+// uniform float uContrast;
+
+// void modifySplatCenter(inout vec3 center) {
+// }
+
+// void modifySplatRotationScale(
+//     vec3 originalCenter,
+//     vec3 modifiedCenter,
+//     inout vec4 rotation,
+//     inout vec3 scale
+// ) {
+// }
+
+// void modifySplatColor(vec3 center, inout vec4 color) {
+//     float h = clamp((center.y - uHeightMin) / (uHeightMax - uHeightMin), 0.0, 1.0);
+
+//     // 增强对比，让变化更明显
+//     h = pow(h, uContrast);
+
+//     vec3 tint = mix(uCoolColor, uWarmColor, h);
+
+//     // 亮度范围拉大一点
+//     float lighting = mix(0.45, 1.35, h);
+
+//     color.rgb *= tint;
+//     color.rgb *= lighting;
+// }
+// `;
+
+//   component.setWorkBufferModifier({ glsl });
+//   component.setParameter('uHeightMin', 0.0);
+//   component.setParameter('uHeightMax', 10.0);
+//   component.setParameter('uWarmColor', [1.15, 1.0, 0.9]);
+//   component.setParameter('uCoolColor', [0.75, 0.82, 1.08]);
+//   component.setParameter('uContrast', 1.4);
+    
+
+  const glsl = `
+uniform vec3 uLightDir;
+uniform vec3 uWarmColor;
+uniform vec3 uCoolColor;
+uniform float uContrast;
+uniform float uIntensity;
+
+void modifySplatCenter(inout vec3 center) {
+}
+
+void modifySplatRotationScale(
+    vec3 originalCenter,
+    vec3 modifiedCenter,
+    inout vec4 rotation,
+    inout vec3 scale
+) {
+}
+
+void modifySplatColor(vec3 center, inout vec4 color) {
+    vec3 fakeNormal = normalize(vec3(center.x * 0.6, 1.0, center.z * 0.6));
+
+    float ndl = max(dot(fakeNormal, normalize(-uLightDir)), 0.0);
+    ndl = pow(ndl, uContrast);
+
+    vec3 tint = mix(uCoolColor, uWarmColor, ndl);
+    float lighting = mix(0.9, 1.2 * uIntensity, ndl);
+
+    color.rgb *= tint;
+    color.rgb *= lighting;
+}
+`;
+  useLayoutEffect(() => {
+    if (!component) return;
+
+    component.setWorkBufferModifier({ glsl });
+  }, [component]);
+
+  useEffect(() => {
+    if (!component || !app) return;
+
+    const updateLightParams = () => {
+      // const sun = app.root.findByName('sun');
+      // if (!sun) return;
+
+      // const forward = sun.forward;
+
+      component.setParameter('uLightDir', [0.35, -0.87, 0.35]);
+
+      component.setParameter('uWarmColor', [1.08, 1.02, 0.97]);
+      component.setParameter('uCoolColor', [0.92, 0.95, 1.03]);
+      component.setParameter('uContrast', 1.2);
+      component.setParameter('uIntensity', 1.2);
+    };
+
+    updateLightParams();
+    app.on('update', updateLightParams);
+
+    return () => {
+      app.off('update', updateLightParams);
+    };
+  }, [component, app]);
 
   return null;
 };

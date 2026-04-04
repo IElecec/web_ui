@@ -30,7 +30,8 @@ const SKY_PRESETS = {
   },
 
   Night: {
-    url: 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/solitude_night_2k.hdr',
+    // url: 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/solitude_night_2k.hdr',
+    url: 'skybox/solitude_night_2k.hdr',
     type: pc.SKYTYPE_DOME,
     scale: [200, 200, 200] as [number, number, number],
     tripodY: 0.05,
@@ -48,7 +49,7 @@ const SKY_PRESETS = {
   },
 };
 
-export function SceneSkybox({ presetName = 'Street Dome' }: { presetName?: keyof typeof SKY_PRESETS }) {
+export function SceneSkybox({ presetName = 'Night' }: { presetName?: keyof typeof SKY_PRESETS }) {
   const app = useApp();
 
   useEffect(() => {
