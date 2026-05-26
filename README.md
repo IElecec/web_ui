@@ -1,5 +1,9 @@
 # Rsbuild project
 
+## Demo
+
+https://github.com/IElecec/web_ui/raw/master/demo.mp4
+
 ## Setup
 
 Install the dependencies:
